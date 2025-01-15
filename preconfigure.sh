@@ -48,10 +48,10 @@ cat <<HERE >/usr/share/nginx/html/index.html
     const map = L.map('map').setView([48, 13.5], 7);
 
     L.vectorGrid.protobuf('${TILESERVER}', {
-        attribution: '${ATTRIBUTION}'
+        attribution: '${ATTRIBUTION}',
         vectorTileLayerStyles: {
             'planet_osm_roads': {
-      					weight: 0.2,
+                weight: 0.2,
                 color: 'black',
                 fill: false
             }
