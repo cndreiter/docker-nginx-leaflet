@@ -21,7 +21,7 @@ cat <<HERE >/usr/share/nginx/html/index.html
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
   <style>
     body {
       padding: 0px;
@@ -38,18 +38,26 @@ cat <<HERE >/usr/share/nginx/html/index.html
 <body>
   <div id="map"></div>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="//unpkg.com/leaflet.vectorgrid@1.3.0/dist/Leaflet.VectorGrid.bundled.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js"></script>
   <script src="autosize.js"></script>
   <script>
     Autosize.enable();
-    var map = L.map('map').setView([51.05, -114.05], 10);
 
-    L.tileLayer('${TILESERVER}', {
-      attribution: '${ATTRIBUTION}'
+    const map = L.map('map').setView([48, 13.5], 7);
+
+    L.vectorGrid.protobuf('${TILESERVER}', {
+        attribution: '${ATTRIBUTION}'
+        vectorTileLayerStyles: {
+            'planet_osm_roads': {
+      					weight: 0.2,
+                color: 'black',
+                fill: false
+            }
+        }
     })
-      .addTo(map);
-
+    .addTo(map);
   </script>
 </body>
 </html>
